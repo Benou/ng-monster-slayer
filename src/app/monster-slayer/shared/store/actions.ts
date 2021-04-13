@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 
-import { Slayer, SlayerType } from '../../shared/models';
+import { Slayer, SlayerType } from '../../shared';
 
 export const incrementRound = createAction('[Monster Slayer] incrementRound');
 

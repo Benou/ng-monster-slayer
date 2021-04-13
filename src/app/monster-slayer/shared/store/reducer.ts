@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 
-import { Slayer } from '../../shared/models';
+import { Slayer, SlayerType } from '../../shared';
 import * as MonsterSlayerActions from './actions';
 
 export interface State {
@@ -13,12 +13,14 @@ export interface State {
 
 export const initialState: State = {
   hero: {
+    type: SlayerType.HERO,
     health: 100,
     maxHealth: 100,
     damage: [5, 12],
     healing: [8, 20]
   },
   monster: {
+    type: SlayerType.MONSTER,
     health: 100,
     maxHealth: 100,
     damage: [8, 12]

@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideMockStore } from '@ngrx/store/testing';
 
 import { MonsterSlayerComponent } from './monster-slayer.component';
+import { SlayerHealthCardComponent, SlayerActionsCardComponent } from '../../components';
 
 describe('MonsterSlayerComponent', () => {
   let component: MonsterSlayerComponent;
@@ -9,7 +10,7 @@ describe('MonsterSlayerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [MonsterSlayerComponent],
+      declarations: [MonsterSlayerComponent, SlayerHealthCardComponent, SlayerActionsCardComponent],
       providers: [provideMockStore({})]
     })
     .compileComponents();

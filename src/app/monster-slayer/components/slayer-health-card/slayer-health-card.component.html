@@ -1,0 +1,19 @@
+<mat-card *ngIf="slayer">
+  <mat-card-header>
+    <mat-card-title>{{ slayer.type }}</mat-card-title>
+    <mat-card-subtitle>
+      <span>
+        <mat-icon>favorite</mat-icon> {{ slayer.maxHealth }}
+      </span>
+      <span>
+        <mat-icon>colorize</mat-icon> {{ slayer.damage }}
+      </span>
+      <span *ngIf="slayer.healing">
+        <mat-icon>healing</mat-icon> {{ slayer.healing }}
+      </span>
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-progress-bar mode="determinate" [value]="slayer.health / slayer.maxHealth * 100"></mat-progress-bar>
+  </mat-card-content>
+</mat-card>
