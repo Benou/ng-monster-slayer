@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 
-import { GameStatus, Slayer, SlayerActionItem, SlayerActionType, slayerActions, SlayerType } from '../../shared';
+import { GameLog, GameStatus, Slayer, SlayerActionItem, SlayerActionType, slayerActions, SlayerType } from '../../shared';
 import * as MonsterSlayerActions from './actions';
 
 export interface State {
@@ -9,6 +9,7 @@ export interface State {
   surrender: boolean;
   round: number;
   specialAttackCooldown: number;
+  logs: GameLog[];
 }
 
 export const initialState: State = {
@@ -27,7 +28,8 @@ export const initialState: State = {
   },
   surrender: false,
   round: 0,
-  specialAttackCooldown: 3
+  specialAttackCooldown: 3,
+  logs: []
 };
 
 export const reducer = createReducer(
@@ -35,7 +37,8 @@ export const reducer = createReducer(
   on(MonsterSlayerActions.setHealth, (state, { from, value }) => ({ ...state, [from]: { ...state[from], health: value } })),
   on(MonsterSlayerActions.surrender, state => ({ ...state, surrender: true })),
   on(MonsterSlayerActions.incrementRound, state => ({ ...state, round: state.round + 1 })),
-  on(MonsterSlayerActions.reset, () => ({ ...initialState }))
+  on(MonsterSlayerActions.reset, () => ({ ...initialState })),
+  on(MonsterSlayerActions.log, (state, { log }) => ({ ...state, logs: [log, ...state.logs] }))
 );
 
 export const getHero = (state: State): Slayer => state.hero;
@@ -61,3 +64,4 @@ export const getGameStatus = (hero: Slayer, monster: Slayer, surrender: boolean)
     isHeroDead && isMonsterDead ? GameStatus.DRAW :
       isMonsterDead ? GameStatus.VICTORY : GameStatus.DEFEAT;
 };
+export const getGameLogs = (state: State): GameLog[] => state.logs;

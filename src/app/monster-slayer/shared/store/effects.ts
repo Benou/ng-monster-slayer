@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
-import { select, Store } from '@ngrx/store';
+import { Action, select, Store } from '@ngrx/store';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
 
-import { MonsterSlayerService, SlayerType } from '../../shared';
+import { MonsterSlayerService, SlayerType, SlayerActionType } from '../../shared';
 import * as MonsterSlayerActions from './actions';
 import * as MonsterSlayerReducer from './reducer';
 import * as MonsterSlayerSelectors from './selectors';
 
 @Injectable()
 export class MonsterSlayerEffects {
-  attack$ = createEffect(() =>
+  attacks$ = createEffect(() =>
     this.actions$.pipe(
       ofType(MonsterSlayerActions.attack, MonsterSlayerActions.specialAttack),
       map(action =>
@@ -28,7 +28,8 @@ export class MonsterSlayerEffects {
         return [
           MonsterSlayerActions.setHealth({ from: to, value: newHealth }),
           ...(counter ? [MonsterSlayerActions.attack({ from: to, counter: false })] : []),
-          ...(isFromHero ? [MonsterSlayerActions.incrementRound()] : [])
+          ...(isFromHero ? [MonsterSlayerActions.incrementRound()] : []),
+          this.log(from, SlayerActionType.ATTACK, newHealth - slayers[to].health)
         ];
       })
     )
@@ -43,9 +44,19 @@ export class MonsterSlayerEffects {
         return [
           MonsterSlayerActions.setHealth({ from: SlayerType.HERO, value: newHealth }),
           MonsterSlayerActions.attack({ from: SlayerType.MONSTER, counter: false }),
-          MonsterSlayerActions.incrementRound()
+          MonsterSlayerActions.incrementRound(),
+          this.log(hero.type, SlayerActionType.HEAL, newHealth - hero.health)
         ];
       })
+    )
+  );
+
+  surrender$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(MonsterSlayerActions.surrender),
+      switchMap(() => [
+        this.log(SlayerType.HERO, SlayerActionType.SURRENDER, 0)
+      ])
     )
   );
 
@@ -54,4 +65,8 @@ export class MonsterSlayerEffects {
     private monsterSlayerService: MonsterSlayerService,
     private store: Store<MonsterSlayerReducer.State>
   ) {}
+
+  protected log(from: SlayerType, actionType: SlayerActionType, rawValue: number): Action {
+    return MonsterSlayerActions.log({ log: { from, actionType, value: Math.abs(rawValue) } });
+  }
 }

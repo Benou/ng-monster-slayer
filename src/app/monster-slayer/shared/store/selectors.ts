@@ -33,3 +33,5 @@ export const selectGameStatus = createSelector(
   selectSurrender,
   MonsterSlayerReducer.getGameStatus
 );
+
+export const selectGameLogs = createSelector(monsterSlayerState, MonsterSlayerReducer.getGameLogs);

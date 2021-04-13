@@ -9,6 +9,7 @@ import { GameStatus, gameOverReasons, Slayer, SlayerActionItem, SlayerActionType
 import * as MonsterSlayerActions from '../../shared/store/actions';
 import * as MonsterSlayerReducer from '../../shared/store/reducer';
 import * as MonsterSlayerSelectors from '../../shared/store/selectors';
+import { GameLog } from '../../shared/models/game-log.interface';
 
 @Component({
   selector: 'app-monster-slayer',
@@ -19,6 +20,7 @@ export class MonsterSlayerComponent implements OnInit, OnDestroy {
   slayers$: Observable<Slayer[]>;
   slayerActions$: Observable<SlayerActionItem[]>;
   gameStatus$: Observable<GameStatus>;
+  gameLogs$: Observable<GameLog[]>;
   onDestroy$: Subject<void>;
 
   constructor(
@@ -28,6 +30,7 @@ export class MonsterSlayerComponent implements OnInit, OnDestroy {
     this.slayers$ = this.store.pipe(select(MonsterSlayerSelectors.selectSlayers));
     this.slayerActions$ = this.store.pipe(select(MonsterSlayerSelectors.selectSlayerActions));
     this.gameStatus$ = this.store.pipe(select(MonsterSlayerSelectors.selectGameStatus));
+    this.gameLogs$ = this.store.pipe(select(MonsterSlayerSelectors.selectGameLogs));
     this.onDestroy$ = new Subject<void>();
   }
 

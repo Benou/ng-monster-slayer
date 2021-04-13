@@ -1,0 +1,19 @@
+<mat-card *ngIf="logs">
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item *ngFor="let log of logs">
+        <mat-icon mat-list-icon>info</mat-icon>
+        <div mat-line>
+          <span>{{ log.from }}</span>
+          <ng-container [ngSwitch]="log.actionType">
+            <span *ngSwitchCase="SlayerActionType.ATTACK"> attacks and deals </span>
+            <span *ngSwitchCase="SlayerActionType.HEAL"> heals himseslf for </span>
+            <span *ngSwitchCase="SlayerActionType.SURRENDER"> surrenders...</span>
+            <span *ngSwitchDefault>oups...</span>
+          </ng-container>
+          <span *ngIf="log.value">{{ log.value }}</span>
+        </div>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>

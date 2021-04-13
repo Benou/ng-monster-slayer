@@ -1,11 +1,8 @@
 <ng-container *ngIf="(slayers$ | async) as slayers">
-  <app-slayer-health-card
-    [slayer]="slayer"
-    *ngFor="let slayer of slayers">
+  <app-slayer-health-card [slayer]="slayer" *ngFor="let slayer of slayers">
   </app-slayer-health-card>
 </ng-container>
 
-<app-slayer-actions-card
-  [items]="slayerActions$ | async"
-  (action)="handleActions($event)">
-</app-slayer-actions-card>
+<app-slayer-actions-card [items]="slayerActions$ | async" (action)="handleActions($event)"></app-slayer-actions-card>
+
+<app-game-logs-card [logs]="gameLogs$ | async"></app-game-logs-card>

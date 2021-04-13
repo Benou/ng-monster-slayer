@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 
-import { Slayer, SlayerType } from '../../shared';
+import { GameLog, Slayer, SlayerType } from '../../shared';
 
 export const incrementRound = createAction('[Monster Slayer] incrementRound');
 
@@ -15,3 +15,4 @@ export const setHealth = createAction(
 );
 
 export const reset = createAction('[Monster Slayer] reset');
+export const log = createAction('[Monster Slayer] log', props<{ log: GameLog }>());
