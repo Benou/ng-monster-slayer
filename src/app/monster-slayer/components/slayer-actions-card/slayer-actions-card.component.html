@@ -1,11 +1,17 @@
-<mat-card *ngIf="items">
+<mat-card *ngIf="items?.length">
+  <mat-card-header>
+    <mat-card-title>Battle Actions</mat-card-title>
+  </mat-card-header>
   <mat-card-content>
-    <button
-      mat-raised-button
-      [disabled]="item.disabled"
-      (click)="performAction(item.type)"
-      *ngFor="let item of items">
-      {{ item.label }}
-    </button>
+    <div class="row">
+      <div class="col-xs-12 col-sm-6 mb-3" *ngFor="let item of items">
+        <button
+          mat-raised-button
+          [disabled]="item.disabled"
+          (click)="performAction(item.type)">
+          {{ item.label }}
+        </button>
+      </div>
+    </div>
   </mat-card-content>
 </mat-card>

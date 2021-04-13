@@ -8,6 +8,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatListModule } from '@angular/material/list';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { MonsterSlayerRoutingModule } from './monster-slayer-routing.module';
 import { MonsterSlayerComponent } from './containers';
@@ -17,6 +18,7 @@ import {
   SlayerHealthCardComponent,
   SlayerActionsCardComponent
 } from './components';
+import { TupleValuesPipe } from './shared/pipes';
 import { MonsterSlayerEffects } from './shared/store/effects';
 import * as MonsterSlayerReducer from './shared/store/reducer';
 
@@ -26,7 +28,8 @@ import * as MonsterSlayerReducer from './shared/store/reducer';
     SlayerHealthCardComponent,
     SlayerActionsCardComponent,
     GameOverDialogComponent,
-    GameLogsCardComponent
+    GameLogsCardComponent,
+    TupleValuesPipe
   ],
   imports: [
     CommonModule,
@@ -37,6 +40,7 @@ import * as MonsterSlayerReducer from './shared/store/reducer';
     MatButtonModule,
     MatDialogModule,
     MatListModule,
+    MatTooltipModule,
     StoreModule.forFeature('monsterSlayer', MonsterSlayerReducer.reducer),
     EffectsModule.forFeature([MonsterSlayerEffects])
   ]

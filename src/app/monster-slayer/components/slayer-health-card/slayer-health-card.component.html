@@ -1,16 +1,21 @@
 <mat-card *ngIf="slayer">
   <mat-card-header>
-    <mat-card-title>{{ slayer.type }}</mat-card-title>
+    <mat-card-title class="text-capitalize">{{ slayer.type }}</mat-card-title>
     <mat-card-subtitle>
-      <span>
-        <mat-icon>favorite</mat-icon> {{ slayer.maxHealth }}
-      </span>
-      <span>
-        <mat-icon>colorize</mat-icon> {{ slayer.damage }}
-      </span>
-      <span *ngIf="slayer.healing">
-        <mat-icon>healing</mat-icon> {{ slayer.healing }}
-      </span>
+      <div class="d-flex">
+        <div class="d-flex align-items-center me-2" matTooltip="Health">
+          <mat-icon>favorite</mat-icon>
+          <span>{{ slayer.maxHealth }}</span>
+        </div>
+        <div class="d-flex align-items-center me-2" matTooltip="Damages">
+          <mat-icon class="sword">colorize</mat-icon>
+          <span>{{ slayer.damage | tupleValues }}</span>
+        </div>
+        <div class="d-flex align-items-center" *ngIf="slayer.healing" matTooltip="Healing">
+          <mat-icon>healing</mat-icon>
+          <span>{{ slayer.healing | tupleValues }}</span>
+        </div>
+      </div>
     </mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>

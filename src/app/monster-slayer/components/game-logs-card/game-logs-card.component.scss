@@ -1,0 +1,13 @@
+.overflow-scroll {
+  max-height: 320px;
+}
+
+.log-value {
+  &.attack {
+    color: tomato;
+  }
+
+  &.heal {
+    color: teal;
+  }
+}

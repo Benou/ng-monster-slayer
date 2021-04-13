@@ -1,8 +1,27 @@
-<ng-container *ngIf="(slayers$ | async) as slayers">
-  <app-slayer-health-card [slayer]="slayer" *ngFor="let slayer of slayers">
-  </app-slayer-health-card>
-</ng-container>
+<div class="container pt-3">
 
-<app-slayer-actions-card [items]="slayerActions$ | async" (action)="handleActions($event)"></app-slayer-actions-card>
+  <!-- SLAYER HEALTH CARDS -->
+  <div class="row mb-3" *ngIf="(slayers$ | async) as slayers">
+    <div class="col-xs-12 col-sm-6 mb-3 mb-sm-0" *ngFor="let slayer of slayers">
+      <app-slayer-health-card [slayer]="slayer"></app-slayer-health-card>
+    </div>
+  </div>
 
-<app-game-logs-card [logs]="gameLogs$ | async"></app-game-logs-card>
+  <div class="row">
+
+    <!-- BATTLE ACTIONS -->
+    <div class="col-xs-12 col-md-6 mb-3 mb-md-0">
+      <app-slayer-actions-card
+        [items]="slayerActions$ | async"
+        (action)="handleActions($event)">
+      </app-slayer-actions-card>
+    </div>
+
+    <!-- BATTLE LOGS -->
+    <div class="col-xs-12 col-md-6">
+      <app-game-logs-card [logs]="gameLogs$ | async"></app-game-logs-card>
+    </div>
+
+  </div>
+
+</div>
