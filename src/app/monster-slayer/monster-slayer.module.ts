@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 import { MonsterSlayerRoutingModule } from './monster-slayer-routing.module';
 import { MonsterSlayerComponent } from './containers';
@@ -8,7 +10,9 @@ import { MonsterSlayerComponent } from './containers';
   declarations: [MonsterSlayerComponent],
   imports: [
     CommonModule,
-    MonsterSlayerRoutingModule
+    MonsterSlayerRoutingModule,
+    StoreModule.forFeature('monsterSlayer', {}),
+    EffectsModule.forFeature([])
   ]
 })
-export class MonsterSlayerModule { }
+export class MonsterSlayerModule {}
