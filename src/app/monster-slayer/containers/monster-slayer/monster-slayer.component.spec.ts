@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { provideMockStore } from '@ngrx/store/testing';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { MonsterSlayerComponent } from './monster-slayer.component';
 
@@ -8,6 +9,9 @@ describe('MonsterSlayerComponent', () => {
 
   beforeEach(async () => {
     TestBed.configureTestingModule({
+      imports: [
+        MatDialogModule
+      ],
       providers: [
         MonsterSlayerComponent,
         provideMockStore({})

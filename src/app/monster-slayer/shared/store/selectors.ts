@@ -26,3 +26,10 @@ export const selectSlayerActions = createSelector(
   selectIsSpecialAttackDisabled,
   MonsterSlayerReducer.getSlayerActions
 );
+
+export const selectGameStatus = createSelector(
+  selectHero,
+  selectMonster,
+  selectSurrender,
+  MonsterSlayerReducer.getGameStatus
+);
