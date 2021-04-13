@@ -8,5 +8,6 @@ import { Slayer } from '../../shared';
   styleUrls: ['./slayer-health-card.component.scss']
 })
 export class SlayerHealthCardComponent {
+  /** The slayer to display. */
   @Input() slayer: Slayer;
 }

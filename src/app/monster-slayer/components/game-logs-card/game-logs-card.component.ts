@@ -8,6 +8,9 @@ import { GameLog, SlayerActionType } from '../../shared';
   styleUrls: ['./game-logs-card.component.scss']
 })
 export class GameLogsCardComponent {
+  /** The logs collection to display. */
   @Input() logs: GameLog[] | null;
+
+  /** Helper internal SlayerActionType enum used for ngSwitchCases. */
   SlayerActionType = SlayerActionType;
 }

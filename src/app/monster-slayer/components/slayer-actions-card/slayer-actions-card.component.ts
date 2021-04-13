@@ -8,13 +8,20 @@ import { SlayerActionItem, SlayerActionType } from '../../shared';
   styleUrls: ['./slayer-actions-card.component.scss']
 })
 export class SlayerActionsCardComponent {
+  /** The battle actions collection. */
   @Input() items: SlayerActionItem[] | null;
+
+  /** Emits when the hero wants to perform a battle action. */
   @Output() action: EventEmitter<SlayerActionType>;
 
   constructor() {
     this.action = new EventEmitter<SlayerActionType>();
   }
 
+  /**
+   * Invokes when the hero wants to perform a battle action.
+   * @param type - The action type to perform.
+   */
   performAction(type: SlayerActionType): void {
     this.action.emit(type);
   }

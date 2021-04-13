@@ -17,10 +17,19 @@ import { GameLog } from '../../shared/models/game-log.interface';
   styleUrls: ['./monster-slayer.component.scss']
 })
 export class MonsterSlayerComponent implements OnInit, OnDestroy {
+  /** Emits the slayers tuple. */
   slayers$: Observable<Slayer[]>;
+
+  /** Emits the current available battle actions. */
   slayerActions$: Observable<SlayerActionItem[]>;
+
+  /** Emits the current game status. */
   gameStatus$: Observable<GameStatus>;
+
+  /** Emits the battle logs. */
   gameLogs$: Observable<GameLog[]>;
+
+  /** Helper subject used to clean up internal subecriptions. */
   onDestroy$: Subject<void>;
 
   constructor(
@@ -34,6 +43,9 @@ export class MonsterSlayerComponent implements OnInit, OnDestroy {
     this.onDestroy$ = new Subject<void>();
   }
 
+  /**
+   * Subscribe to the game status observable. Display the rematch dialog when the game is over.
+   */
   ngOnInit(): void {
     this.gameStatus$.pipe(
       filter((status: GameStatus): boolean => status !== GameStatus.SLAYERING),
@@ -44,11 +56,18 @@ export class MonsterSlayerComponent implements OnInit, OnDestroy {
     ).subscribe(() => this.store.dispatch(MonsterSlayerActions.reset()));
   }
 
+  /**
+   * Clean up internal subscriptions.
+   */
   ngOnDestroy(): void {
     this.onDestroy$.next();
     this.onDestroy$.complete();
   }
 
+  /**
+   * Handle the given hero action. Let's invoke the appropriate data-flow.
+   * @param type - The action type to handle.
+   */
   handleActions(type: SlayerActionType): void {
     let action: Action | null = null;
 
@@ -72,6 +91,11 @@ export class MonsterSlayerComponent implements OnInit, OnDestroy {
     action !== null && this.store.dispatch(action);
   }
 
+  /**
+   * Get the game over reason according to the given game status.
+   * @param status - The current game status.
+   * @returns The game over reason text.
+   */
   handleGameOverReason(status: GameStatus): string | undefined {
     return gameOverReasons.get(status);
   }
