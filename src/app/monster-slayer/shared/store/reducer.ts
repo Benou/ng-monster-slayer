@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 
-import { Slayer, SlayerType } from '../../shared';
+import { Slayer, SlayerActionItem, SlayerActionType, slayerActions, SlayerType } from '../../shared';
 import * as MonsterSlayerActions from './actions';
 
 export interface State {
@@ -45,3 +45,8 @@ export const getSurrender = (state: State): boolean => state.surrender;
 export const getRound = (state: State): number => state.round;
 export const getSpecialAttackCooldown = (state: State): number => state.specialAttackCooldown;
 export const isSpecialAttackDisabled = (round: number, specialAttackCooldown: number): boolean => round % specialAttackCooldown !== 0;
+export const getSlayerActions = (disabled: boolean): SlayerActionItem[] => {
+  return slayerActions.map(item => {
+    return item.type === SlayerActionType.SPECIAL_ATTACK ? { ...item, disabled } : { ...item };
+  });
+};

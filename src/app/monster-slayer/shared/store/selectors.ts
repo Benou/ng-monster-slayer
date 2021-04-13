@@ -21,3 +21,8 @@ export const selectIsSpecialAttackDisabled = createSelector(
   selectSpecialAttackCooldown,
   MonsterSlayerReducer.isSpecialAttackDisabled
 );
+
+export const selectSlayerActions = createSelector(
+  selectIsSpecialAttackDisabled,
+  MonsterSlayerReducer.getSlayerActions
+);

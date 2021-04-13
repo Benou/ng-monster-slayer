@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { select, Store } from '@ngrx/store';
+import { Action, select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { Slayer, SlayerType } from '../../shared';
+import { Slayer, SlayerActionItem, SlayerActionType, SlayerType } from '../../shared';
 import * as MonsterSlayerActions from '../../shared/store/actions';
 import * as MonsterSlayerReducer from '../../shared/store/reducer';
 import * as MonsterSlayerSelectors from '../../shared/store/selectors';
@@ -14,27 +14,33 @@ import * as MonsterSlayerSelectors from '../../shared/store/selectors';
 })
 export class MonsterSlayerComponent {
   slayers$: Observable<Slayer[]>;
+  slayerActions$: Observable<SlayerActionItem[]>;
 
   constructor(private store: Store<MonsterSlayerReducer.State>) {
     this.slayers$ = this.store.pipe(select(MonsterSlayerSelectors.selectSlayers));
+    this.slayerActions$ = this.store.pipe(select(MonsterSlayerSelectors.selectSlayerActions));
   }
 
-  handleActions(action: string): void {
-    switch (action) {
-      case 'attack':
-        this.store.dispatch(MonsterSlayerActions.attack({ from: SlayerType.HERO, counter: true }));
+  handleActions(type: SlayerActionType): void {
+    let action: Action | null = null;
+
+    switch (type) {
+      case SlayerActionType.ATTACK:
+        action = MonsterSlayerActions.attack({ from: SlayerType.HERO, counter: true });
         break;
-      case 'specialAttack':
-        this.store.dispatch(MonsterSlayerActions.specialAttack());
+      case SlayerActionType.SPECIAL_ATTACK:
+        action = MonsterSlayerActions.specialAttack();
         break;
-      case 'heal':
-        this.store.dispatch(MonsterSlayerActions.heal());
+      case SlayerActionType.HEAL:
+        action = MonsterSlayerActions.heal();
         break;
-      case 'surrender':
-        this.store.dispatch(MonsterSlayerActions.surrender());
+      case SlayerActionType.SURRENDER:
+        action = MonsterSlayerActions.surrender();
         break;
       default:
         break;
     }
+
+    action !== null && this.store.dispatch(action);
   }
 }
