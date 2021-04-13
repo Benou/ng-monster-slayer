@@ -5,6 +5,7 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { MonsterSlayerRoutingModule } from './monster-slayer-routing.module';
 import { MonsterSlayerComponent } from './containers';
+import { MonsterSlayerEffects } from './shared/store/effects';
 import * as MonsterSlayerReducer from './shared/store/reducer';
 
 @NgModule({
@@ -13,7 +14,7 @@ import * as MonsterSlayerReducer from './shared/store/reducer';
     CommonModule,
     MonsterSlayerRoutingModule,
     StoreModule.forFeature('monsterSlayer', MonsterSlayerReducer.reducer),
-    EffectsModule.forFeature([])
+    EffectsModule.forFeature([MonsterSlayerEffects])
   ]
 })
 export class MonsterSlayerModule {}

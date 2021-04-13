@@ -1,15 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+
+import * as MonsterSlayerReducer from '../../shared/store/reducer';
 
 @Component({
   selector: 'app-monster-slayer',
   templateUrl: './monster-slayer.component.html',
   styleUrls: ['./monster-slayer.component.scss']
 })
-export class MonsterSlayerComponent implements OnInit {
+export class MonsterSlayerComponent {
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  constructor(private store: Store<MonsterSlayerReducer.State>) {}
 }
