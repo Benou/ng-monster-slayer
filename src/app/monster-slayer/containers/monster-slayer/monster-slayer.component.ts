@@ -5,11 +5,10 @@ import { Observable, Subject } from 'rxjs';
 import { filter, exhaustMap, takeUntil } from 'rxjs/operators';
 
 import { GameOverDialogComponent } from '../../components';
-import { GameStatus, gameOverReasons, Slayer, SlayerActionItem, SlayerActionType, SlayerType } from '../../shared';
+import { GameLog, GameStatus, Slayer, SlayerActionItem, SlayerActionType, SlayerType } from '../../shared';
 import * as MonsterSlayerActions from '../../shared/store/actions';
 import * as MonsterSlayerReducer from '../../shared/store/reducer';
 import * as MonsterSlayerSelectors from '../../shared/store/selectors';
-import { GameLog } from '../../shared/models/game-log.interface';
 
 @Component({
   selector: 'app-monster-slayer',
@@ -49,9 +48,7 @@ export class MonsterSlayerComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.gameStatus$.pipe(
       filter((status: GameStatus): boolean => status !== GameStatus.SLAYERING),
-      exhaustMap((status: GameStatus) =>
-        this.dialog.open(GameOverDialogComponent, { data: this.handleGameOverReason(status) }).afterClosed()
-      ),
+      exhaustMap(() => this.dialog.open(GameOverDialogComponent).afterClosed()),
       takeUntil(this.onDestroy$)
     ).subscribe(() => this.store.dispatch(MonsterSlayerActions.reset()));
   }
@@ -92,11 +89,12 @@ export class MonsterSlayerComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Get the game over reason according to the given game status.
-   * @param status - The current game status.
-   * @returns The game over reason text.
+   * Tracker function used to optimize ngFor children management.
+   * @param index - The slayer index.
+   * @param item - The slayer item.
+   * @returns The slayer tracker value.
    */
-  handleGameOverReason(status: GameStatus): string | undefined {
-    return gameOverReasons.get(status);
+  trackSlayers(index: number, item: Slayer) {
+    return item.type;
   }
 }

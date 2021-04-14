@@ -15,7 +15,11 @@
               <span *ngSwitchCase="SlayerActionType.SURRENDER"> surrenders...</span>
               <span *ngSwitchDefault>oups...</span>
             </ng-container>
-            <span *ngIf="log.value" [ngClass]="['log-value', log.actionType]">{{ log.value }}</span>
+            <span
+              [ngClass]="['log-value', log.actionType]"
+              *ngIf="log.actionType !== SlayerActionType.SURRENDER">
+              {{ log.value || 'Max' }}
+            </span>
           </div>
         </mat-list-item>
       </mat-list>

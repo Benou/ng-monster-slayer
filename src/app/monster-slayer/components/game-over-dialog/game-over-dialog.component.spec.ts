@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { provideMockStore } from '@ngrx/store/testing';
 
 import { GameOverDialogComponent } from './game-over-dialog.component';
 
@@ -10,7 +10,7 @@ describe('GameOverDialogComponent', () => {
     TestBed.configureTestingModule({
       providers: [
         GameOverDialogComponent,
-        { provide: MAT_DIALOG_DATA, useValue: 'foo' }
+        provideMockStore({})
       ]
     });
 

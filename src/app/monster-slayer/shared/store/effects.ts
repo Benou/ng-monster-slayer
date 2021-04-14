@@ -66,6 +66,13 @@ export class MonsterSlayerEffects {
     private store: Store<MonsterSlayerReducer.State>
   ) {}
 
+  /**
+   * Helper method used as a factory to build the log action.
+   * @param from - The slayer to log.
+   * @param actionType - The log action type.
+   * @param rawValue - The corresponding log value.
+   * @returns The log action.
+   */
   protected log(from: SlayerType, actionType: SlayerActionType, rawValue: number): Action {
     return MonsterSlayerActions.log({ log: { from, actionType, value: Math.abs(rawValue) } });
   }

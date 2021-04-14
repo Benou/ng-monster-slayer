@@ -5,3 +5,42 @@
 .sword {
   transform: rotate(180deg);
 }
+
+/* Slayer styles */
+
+$slayer-statuses: ('idle': -2px, 'heal': -50px, 'hurt': -98px);
+
+.slayer {
+  width: 24px;
+  height: 24px;
+  animation: slayer_anim .5s steps(4) infinite;
+  transform: scale(2);
+
+  &.hero {
+    background-image: url('/assets/hero.png');
+  }
+
+  &.monster {
+    background-image: url('/assets/monster.png');
+  }
+
+  @each $status, $y in $slayer-statuses {
+    &.#{$status} {
+      background-position-y: $y;
+    }
+  }
+
+  &.die {
+    background-position-x: -72px;
+    background-position-y: -122px;
+    animation: none;
+  }
+}
+
+/* Slayer animation */
+
+@keyframes slayer_anim {
+  to {
+    background-position-x: -96px;
+  }
+}

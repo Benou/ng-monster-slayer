@@ -1,11 +1,12 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { SlayerActionItem, SlayerActionType } from '../../shared';
 
 @Component({
   selector: 'app-slayer-actions-card',
   templateUrl: './slayer-actions-card.component.html',
-  styleUrls: ['./slayer-actions-card.component.scss']
+  styleUrls: ['./slayer-actions-card.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SlayerActionsCardComponent {
   /** The battle actions collection. */

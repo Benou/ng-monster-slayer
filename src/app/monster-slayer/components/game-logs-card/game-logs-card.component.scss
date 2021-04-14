@@ -2,6 +2,10 @@
   max-height: 320px;
 }
 
+.mat-list-item:nth-child(odd){
+  background-color: rgba(0, 0, 0, .1);
+}
+
 .log-value {
   &.attack {
     color: tomato;

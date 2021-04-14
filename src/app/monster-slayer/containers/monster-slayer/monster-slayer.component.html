@@ -2,7 +2,7 @@
 
   <!-- SLAYER HEALTH CARDS -->
   <div class="row mb-3" *ngIf="(slayers$ | async) as slayers">
-    <div class="col-xs-12 col-sm-6 mb-3 mb-sm-0" *ngFor="let slayer of slayers">
+    <div class="col-xs-12 col-sm-6 mb-3 mb-sm-0" *ngFor="let slayer of slayers; trackBy: trackSlayers">
       <app-slayer-health-card [slayer]="slayer"></app-slayer-health-card>
     </div>
   </div>

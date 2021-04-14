@@ -1,5 +1,6 @@
 <mat-card *ngIf="slayer">
   <mat-card-header>
+    <div mat-card-avatar class="slayer" [ngClass]="avatarClass$ | async"></div>
     <mat-card-title class="text-capitalize">{{ slayer.type }}</mat-card-title>
     <mat-card-subtitle>
       <div class="d-flex">
