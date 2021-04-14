@@ -2,6 +2,18 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.6.
 
+## Ready for battle !
+
+<img width="1135" alt="Capture d’écran 2021-04-14 à 09 44 31" src="https://user-images.githubusercontent.com/1434222/114673300-536dc700-9d06-11eb-8e8e-57cf6890f9bf.png">
+
+Aye Heroes ! Are you ready for the great battle ?! Maybe you are afraid to fight against monsters...
+Be brave ! Be strong ! This is the Monster Slayer App !
+
+You can make `attacks`, `heal` yourself, sometimes a `special attack` is available and finally if the
+fear is too intense, you can `surrender` !
+
+[Fight!](https://benou.github.io/ng-monster-slayer/monster-slayer)
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
